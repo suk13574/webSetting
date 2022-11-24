@@ -1,14 +1,32 @@
-package com.example.demo.test;
+package com.devfun.settingweb_boot.test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.devfun.settingweb_boot.service.StatisticService;
 
 @Controller
 public class settingTest {
+	
+	@Autowired
+	private StatisticService service;
+	
+	@ResponseBody
+	@RequestMapping("/sqlyearStatistic")
+	public Map<String, Object> sqltest(String year) throws Exception{
+//		HashMap<String, Object> testmap = new HashMap<>();
+//		testmap.put("test", "OK");
+//		return testmap;
+		return service.yearloginNum(year);
+	}
 	
 	@RequestMapping("/test")
 	public ModelAndView test() throws Exception{
