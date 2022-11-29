@@ -14,10 +14,5 @@
 			AND ri.requestCode = 'L';
 	</select>
 	
-	<resultMap id="loginUesrlist" type="com.devfun.settingweb_boot.dto.LoginUser">
-		<result column="ri.userId" property="userId"/>
-		<result column="user.HR_ORGAN" property="hrOrgan"/>
-		<result column="ri.createDate" property="createDate"/>
-	</resultMap>
 </mapper>
 

@@ -39,22 +39,17 @@ public class StatisticServiceImpl implements StatisticService{
 	public HashMap<String, Object> monthLoginUser(String month) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> retVal = new HashMap<String, Object>();
-		List<LoginUser> loginUser = uList.selectMonth(month);
-		retVal.put("totCnt", loginUser.size());
-		retVal.put("month", month);
-		retVal.put("is_success", true);
-		retVal.put("list", loginUser);
-//		try {
-//			List<LoginUser> loginUser = uList.selectMonth(month);
-//			retVal.put("totCnt", loginUser.size());
-//			retVal.put("month", month);
-//			retVal.put("is_success", true);
-//			retVal.put("list", loginUser);
-//		}catch(Exception e) {
-//			retVal.put("totCnt", -999);
-//			retVal.put("month", month);
-//			retVal.put("is_success", false);
-//		}
+		try {
+			List<LoginUser> loginUser = uList.selectMonth(month);
+			retVal.put("totCnt", loginUser.size());
+			retVal.put("month", month);
+			retVal.put("is_success", true);
+			retVal.put("list", loginUser);
+		}catch(Exception e) {
+			retVal.put("totCnt", -999);
+			retVal.put("month", month);
+			retVal.put("is_success", false);
+		}
 		
 		return retVal;
 	}

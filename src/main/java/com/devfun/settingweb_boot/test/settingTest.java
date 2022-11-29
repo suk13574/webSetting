@@ -28,12 +28,6 @@ public class settingTest {
 		return service.yearloginNum(year);
 	}
 	
-	@ResponseBody
-	@RequestMapping("/login/months")
-	public Map<String, Object> monthLogin(String month) throws Exception{
-		return service.monthLoginUser(month);
-	}
-	
 	@RequestMapping("/test")
 	public ModelAndView test() throws Exception{
 		System.out.println("/test mapping");
