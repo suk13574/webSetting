@@ -14,5 +14,13 @@
 			AND ri.requestCode = 'L';
 	</select>
 	
+	<select id="selectDay" parameterType="string" resultType="com.devfun.settingweb_boot.dto.LoginUser">
+		select ri.userId as userId,  user.HR_ORGAN as hrOrgan, ri.createDate as createDate
+		from statistic.requestinfo ri
+		join statistic.user user
+			on ri.UserID = user.userID
+		where mid(createDate, 5, 2) = #{day}
+			AND ri.requestCode = 'L';
+	</select>
 </mapper>
 

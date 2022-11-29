@@ -54,5 +54,24 @@ public class StatisticServiceImpl implements StatisticService{
 		return retVal;
 	}
 
+	@Override
+	public HashMap<String, Object> dayLoginUser(String day) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> retVal = new HashMap<String, Object>();
+		try {
+			List<LoginUser> loginUser = uList.selectDay(day);
+			retVal.put("totCnt", loginUser.size());
+			retVal.put("day", day);
+			retVal.put("is_success", true);
+			retVal.put("list", loginUser);
+		}catch(Exception e) {
+			retVal.put("totCnt", -999);
+			retVal.put("day", day);
+			retVal.put("is_success", false);
+		}
+		
+		return retVal;
+	}
+
 
 }
