@@ -10,4 +10,5 @@
         from statistic.requestinfo ri
         where left(ri.createDate, 2) = #{year};
 	</select>
+
 </mapper>
