@@ -1,4 +1,4 @@
-# webSetting
+# 코멘토-
 
 > [1주차](#1주차-) - 스프링 프레임워크와 Maria DB 설정 후 테스트 화면 출력 </br>
 [2주차](#2주차-) - HTTP와 REST API, 통계 API 초안 작성 </br>
