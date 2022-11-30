@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.devfun.settingweb_boot.dao.StatisticList;
 import com.devfun.settingweb_boot.dao.StatisticMapper;
 import com.devfun.settingweb_boot.dto.LoginUser;
+import com.devfun.settingweb_boot.dto.MonthCnt;
 
 @Service
 public class StatisticServiceImpl implements StatisticService{
@@ -67,6 +68,26 @@ public class StatisticServiceImpl implements StatisticService{
 		}catch(Exception e) {
 			retVal.put("totCnt", -999);
 			retVal.put("day", day);
+			retVal.put("is_success", false);
+		}
+		
+		return retVal;
+	}
+	
+
+	//부서별 월별 로그인 수
+	@Override
+	public HashMap<String, Object> monthDepartmentLoginUser(String department) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> retVal = new HashMap<String, Object>();
+		try {
+			List<MonthCnt> monthCnt = uList.selectMonthDepartment(department);
+			retVal.put("department", department);
+			retVal.put("is_success", true);
+			retVal.put("list", monthCnt);
+		}catch(Exception e) {
+			retVal.put("totCnt", -999);
+			retVal.put("department", department);
 			retVal.put("is_success", false);
 		}
 		

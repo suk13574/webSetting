@@ -28,4 +28,11 @@ public class LoginCntController {
 	public Map<String, Object> dayLogin(String day) throws Exception{
 		return service.dayLoginUser(day);
 	}
+	
+	//부서별 월별 로그인 수
+	@ResponseBody
+	@RequestMapping("login/months/departments")
+	public Map<String, Object> monthDepartmentLogin(String department) throws Exception{
+		return service.monthDepartmentLoginUser(department);
+	}
 }

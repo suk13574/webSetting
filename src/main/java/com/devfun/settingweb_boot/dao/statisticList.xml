@@ -22,5 +22,15 @@
 		where mid(createDate, 5, 2) = #{day}
 			AND ri.requestCode = 'L';
 	</select>
+	
+	<select id="selectMonthDepartment" parameterType="string" resultType="com.devfun.settingweb_boot.dto.MonthCnt">
+		select count(*) as cnt, mid(ri.createDate, 3, 2) as month
+		from statistic.requestinfo ri
+		join statistic.user user
+			on ri.UserID = user.userID
+		where ri.requestCode = 'L'
+			AND user.HR_ORGAN = #{department}
+		group by mid(ri.createDate, 3, 2);
+	</select>
 </mapper>
 

@@ -12,5 +12,7 @@ public interface StatisticService {
    public HashMap<String,Object> monthLoginUser(String month);
    
    public HashMap<String,Object> dayLoginUser(String day);
+   
+   public HashMap<String,Object> monthDepartmentLoginUser(String department);
 
 }
