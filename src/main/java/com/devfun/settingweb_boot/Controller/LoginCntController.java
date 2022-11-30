@@ -35,4 +35,11 @@ public class LoginCntController {
 	public Map<String, Object> monthDepartmentLogin(String department) throws Exception{
 		return service.monthDepartmentLoginUser(department);
 	}
+	
+	//평균 하루 로그인 수
+	@ResponseBody
+	@RequestMapping("login/avg")
+	public Map<String, Object> avgDayLoginCnt(String yearMonth) throws Exception{
+		return service.avgDayLoginCnt(yearMonth);
+	}
 }

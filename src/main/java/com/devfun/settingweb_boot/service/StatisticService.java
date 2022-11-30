@@ -15,4 +15,5 @@ public interface StatisticService {
    
    public HashMap<String,Object> monthDepartmentLoginUser(String department);
 
+   public HashMap<String,Object> avgDayLoginCnt(String year);
 }

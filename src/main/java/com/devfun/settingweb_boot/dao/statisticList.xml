@@ -32,5 +32,14 @@
 			AND user.HR_ORGAN = #{department}
 		group by mid(ri.createDate, 3, 2);
 	</select>
+	
+	<select id="selectTotalMonth" parameterType="string" resultType="int">
+	select count(*) as cnt
+		from statistic.requestinfo ri
+	join statistic.user user
+		on ri.UserID = user.userID
+	where ri.requestCode = 'L'
+  		AND left(ri.createDate, 4) = #{yearMonth}
+	</select>
 </mapper>
 
