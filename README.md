@@ -2,7 +2,8 @@
 
 > [1주차](#1주차-) - 스프링 프레임워크와 Maria DB 설정 후 테스트 화면 출력 </br>
 [2주차](#2주차-) - HTTP와 REST API, 통계 API 초안 작성 </br>
-[3주차](#3주차-) - 스프링 부트 개발 환경 셋팅, 통계 API 수정, 통계 API 위한 SQL문 작성해보기
+[3주차](#3주차-) - 스프링 부트 개발 환경 셋팅, 통계 API 수정, 통계 API 위한 SQL문 작성해보기 </br>
+[4주차](#4주차-) - API 개발
 
 </br>
 
@@ -140,3 +141,115 @@
   - document 브랜치 SQL 작성 폴더에 업로드
   - 월별 접속자 수, 일자별 접속자 수, 부서별 월별 로그인 수 작성
   - 추후 수정 필요
+
+---
+### 4주차 </br>
+> API 문서와 DB를 참고하여 API 개발 </br> 
+ 코드: springBoot 브랜치 </br>
+ API 문서 및 SQL 문서: document 브랜치
+
+**1. 프로젝트 구조**
+
+<img src="https://user-images.githubusercontent.com/74169420/205085870-159f7ce3-de13-462a-b2cc-44b6e6ab5ff0.JPG" width="200" height="">
+
+- dto
+  - LoginUser
+  - MonthCnt
+- dao
+  - StatisticList.java: statisticList.xml 매핑
+  - statisticList.xml: SW 활용률 API 개발 위한 쿼리문
+- Service
+  - StatisticService.java: 인터페이스
+  - StatisticServiceImpl.java: 구현체, SW 활용률 API 개발 위한 서비스 로직
+- Controller
+  - LoginCntController.java: SW 활용률 API 개발 위한 서비스 로직, URI 매핑
+
+</br>
+
+**2. 월별 접속자 수 API**
+- dao
+  - 인터페이스
+    - `public List<LoginUser> selectMonth(String month);`
+    - 파라미터: month
+    - 반환: LoginUesr 리스트
+  - SQL
+    - id : selectMonth
+
+- service
+  - `public HashMap<String,Object> monthLoginUser(String month);`
+    - 파라미터: month
+    - 반환: Json 데이터를 위한 HashMap
+    - HashMap: 월별 접속자 수, 월, 성공여부, 접속자 리스트 받음
+- controller
+  - 매핑 URI: login/months
+- 실행 예시
+  - http://localhost:8031//login/months?month=08 
+  <img src="https://user-images.githubusercontent.com/74169420/205084775-b6afd908-e06a-4813-9eb1-2d1bcaf6cb24.JPG" width="500" height="">
+
+
+</br>
+
+**3. 일자별 접속자 수 API**
+- dao
+  - 인터페이스
+    - `public List<LoginUser> selectDay(String day);`
+    - 파라미터: day
+    - 반환: LoginUesr 리스트
+  - SQL
+    - id : selectDay
+
+- service
+  - `public HashMap<String,Object> dayLoginUser(String day);`
+    - 파라미터: day
+    - 반환: Json 데이터를 위한 HashMap
+    - HashMap: 일별 접속자 수, 일, 성공여부, 접속자 리스트 받음
+- controller
+  - 매핑 URI: /login/days
+- 실행 예시
+  - http://localhost:8031//login/days?day=22
+  <img src="https://user-images.githubusercontent.com/74169420/205084786-c890a887-6019-4466-8bb5-8e87a6e59764.JPG" width="500" height="">
+
+</br>
+
+**4. 평균 하루 로그인 수 API**
+- dao
+  - 인터페이스
+    - `public int selectTotalMonth(String yearMonth);`
+    - 파라미터: yearMonth
+    - 반환: int
+  - SQL
+    - id : selectTotalMonth
+
+- service
+  - `public HashMap<String,Object> avgDayLoginCnt(String yearMonth);`
+    - 파라미터: yearMonth
+    - 반환: Json 데이터를 위한 HashMap
+    - HashMap: 평균 하루 로그인 수, 년도 월, 성공 여부
+  - 매핑 URI: login/avg 
+- 실행 예시
+  - http://localhost:8031/login/avg?yearMonth=2007
+  <img src="https://user-images.githubusercontent.com/74169420/205084813-25c3aa54-ac25-4303-8a07-b0b56e427c2e.JPG" width="500" height="">
+
+</br>
+
+**5. 부서별 월별 로그인 수 API**
+- dao
+  - 인터페이스
+    - `public List<MonthCnt> selectMonthDepartment(String department);`
+    - 파라미터: department
+    - 반환: MonthCnt 리스트
+  - SQL
+    - id : selectMonthDepartment
+
+- service
+  - `public HashMap<String,Object> monthDepartmentLoginUser(String department);`
+    - 파라미터: department
+    - 반환: Json 데이터를 위한 HashMap
+    - HashMap: 부서, 성공여부, 월별 로그인 수 리스트
+- controller
+  - 매핑 URI: /login/month/departments
+- 실행 예시
+  - http://localhost:8031/login/months/departments?department=IT 
+  <img src="https://user-images.githubusercontent.com/74169420/205084821-333cc7ad-a4bb-4d39-9828-b389cf7cf9f7.JPG" width="500" height="">
+
+</br>
