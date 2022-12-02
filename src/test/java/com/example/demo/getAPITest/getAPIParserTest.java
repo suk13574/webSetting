@@ -1,4 +1,4 @@
-package com.devfun.settingweb_boot;
+package com.example.demo.getAPITest;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -8,17 +8,13 @@ import java.util.Map;
 
 import org.json.simple.parser.ParseException;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.devfun.settingweb_boot.SettingwebBootApplication;
 import com.devfun.settingweb_boot.API.HolidayInfoAPI;
 
-@SpringBootApplication
-public class SettingwebBootApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(SettingwebBootApplication.class, args);
-		
-		//테스트
+public class getAPIParserTest {
+	
+	public static void main(String[] args) {		
 		HolidayInfoAPI holiyday = new HolidayInfoAPI();
 		try {
 			HashSet<String> result = holiyday.hoilday("2022", "09");
