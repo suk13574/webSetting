@@ -41,5 +41,15 @@
 	where ri.requestCode = 'L'
   		AND left(ri.createDate, 4) = #{yearMonth}
 	</select>
+	
+	<select id="selectYearMonth" parameterType="string" resultType="com.devfun.settingweb_boot.dto.LoginUser">
+	select ri.userId as userId,  user.HR_ORGAN as hrOrgan, ri.createDate as createDate
+		from statistic.requestinfo ri
+	join statistic.user user
+		on ri.UserID = user.userID
+	where left(ri.createDate, 4) = #{yearMonth}
+		AND ri.requestCode = 'L';
+	</select>
+	
 </mapper>
 

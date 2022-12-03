@@ -19,20 +19,20 @@ public class SettingwebBootApplication {
 		SpringApplication.run(SettingwebBootApplication.class, args);
 		
 		//테스트
-		HolidayInfoAPI holiyday = new HolidayInfoAPI();
-		try {
-			HashSet<String> result = holiyday.hoilday("2022", "09");
-			Iterator<String> iter = result.iterator();
-			while(iter.hasNext()) {
-				System.out.println(iter.next());
-				
-			}
-			
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		HolidayInfoAPI holiyday = new HolidayInfoAPI();
+//		try {
+//			HashSet<String> result = holiyday.hoilday("2022", "09");
+//			Iterator<String> iter = result.iterator();
+//			while(iter.hasNext()) {
+//				System.out.println(iter.next());
+//				
+//			}
+//			
+//			
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 	}
 

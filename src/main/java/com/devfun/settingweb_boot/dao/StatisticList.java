@@ -13,4 +13,6 @@ public interface StatisticList {
 	public List<MonthCnt> selectMonthDepartment(String department);
 	
 	public int selectTotalMonth(String yearMonth);
+	
+	public List<LoginUser> selectYearMonth(String yearMonth);
 }

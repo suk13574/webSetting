@@ -1,12 +1,15 @@
 package com.devfun.settingweb_boot.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.devfun.settingweb_boot.API.HolidayInfoAPI;
 import com.devfun.settingweb_boot.dao.StatisticList;
 import com.devfun.settingweb_boot.dao.StatisticMapper;
 import com.devfun.settingweb_boot.dto.LoginUser;
@@ -120,6 +123,43 @@ public class StatisticServiceImpl implements StatisticService{
 
 		} catch (Exception e) {
 			retVal.put("avgCnt", -999);
+			retVal.put("is_success", false);
+		}
+		
+		return retVal;
+	}
+
+	//공휴일을 제외한 로그인 수
+	@Override
+	public HashMap<String, Object> monthWeekdayLoginUser(String yearMonth) {
+		HashMap<String, Object> retVal = new HashMap<String, Object>();
+		HolidayInfoAPI holiyday = new HolidayInfoAPI();
+		List<LoginUser> weekdayLoginUser = new ArrayList<>();
+		
+		try {
+			List<LoginUser> loginUser = uList.selectYearMonth(yearMonth);
+			String year = "20" + yearMonth.substring(0, 2);
+			String month = yearMonth.substring(2);
+			
+			System.out.println("year: "+year+", month: "+month);
+			
+			HashSet<String> holidaySet = holiyday.hoilday(year, month);
+			
+			for(LoginUser user : loginUser) {
+				String date = user.getCreateDate().substring(0,6);
+				if(!holidaySet.contains(date)) {
+					weekdayLoginUser.add(user);
+				}
+			}
+			
+			retVal.put("totCnt", weekdayLoginUser.size());
+			retVal.put("yearMonth", yearMonth);
+			retVal.put("is_success", true);
+			retVal.put("list", weekdayLoginUser);
+			
+		} catch(Exception e) {
+			retVal.put("totCnt", -999);
+			retVal.put("yearMonth", yearMonth);
 			retVal.put("is_success", false);
 		}
 		

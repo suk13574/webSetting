@@ -42,4 +42,11 @@ public class LoginCntController {
 	public Map<String, Object> avgDayLoginCnt(String yearMonth) throws Exception{
 		return service.avgDayLoginCnt(yearMonth);
 	}
+	
+	//공휴일을 제외한 로그인 수
+	@ResponseBody
+	@RequestMapping("login/months/weekdays")
+	public Map<String, Object> monthWeekdayLoginCnt(String yearMonth) throws Exception{
+		return service.monthWeekdayLoginUser(yearMonth);
+	}
 }
