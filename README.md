@@ -257,3 +257,43 @@
   <img src="https://user-images.githubusercontent.com/74169420/205084821-333cc7ad-a4bb-4d39-9828-b389cf7cf9f7.JPG" width="500" height="">
 
 </br>
+
+**6. 휴일을 제외한 로그인 수 API**
+- 공휴일 API 받아오기
+  - 공공 데이터 포털 사이트 이용
+  - https://www.data.go.kr/data/15012690/openapi.do
+  - 연도, 월 입력하면 공휴일 리스트 받음
+- `com.devfun.settingweb_boot.API.HolidayInfoAPI.class`
+  - 위 사이트 활용하여 공휴일 API 받아옴
+  - 주요 기능
+    - 공휴일 API 조회 후 json으로 받음
+    - 받은 json 데이터 파싱 후 날짜만 추출하여 Set으로 담아 리턴
+- dao
+  - YYMM 포맷 날짜 String 파라미터 보내면 해당 월에 로그인한 유저 리스트 반환
+  - 인터페이스
+    - `public List<LoginUser> selectYearMonth(String yearMonth);`
+    - 파라미터: yearMonth
+    - 반환: LoginUser 리스트
+  - SQL
+    - id : selectYearMonth
+
+- service
+  - `public HashMap<String,Object> monthWeekdayLoginUser(String yearMonth);`
+    - 파라미터: yearMonth
+    - 반환: Json 데이터를 위한 HashMap
+    - HashMap: 휴일을 제외한 로그인 수, 부서, 성공여부, 휴일을 제외한 로그인 유저 리스트
+- controller 
+  - 매핑 URI: /login/months/weekdays
+- 실행 예시(22년 09월 검색)
+  - DB에서 22년 09월 로그인 기록 확인
+    - 4개 조회
+    - 22년 9월 11일은 추석 공휴일 -> 휴일 제외한 로그인을 조회하면 이 9월 11월 데이터는 없어야 함
+  <img src="https://user-images.githubusercontent.com/74169420/205426339-504b3fe2-321f-406b-b86a-3305bfe9edf8.jpg" width="500" height="">
+
+  - 실제 테스트
+    - http://localhost:8031/login/months/weekdays?yearMonth=2209 검색
+    - 9월 11일을 제외한 나머지 2개 데이터만 출력 확인
+  <img src="https://user-images.githubusercontent.com/74169420/205426337-27673bce-9cb5-4581-aa5f-b23d7eed010b.jpg" width="500" height="">
+
+**7. API구축 후 API와 SQL 문서 수정**
+- document 브랜치에서 확인 가능
